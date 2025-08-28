@@ -14,5 +14,9 @@ namespace WorkingWithDB.Models
         public long Size { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public string StoragePath { get; set; } = string.Empty;
+        public Guid FolderId { get; set; }
+        public Guid UserId { get; set; }
+        public FolderEntity? Folder { get; set; }
+        public UserEntity? User { get; set; }
     }
 }
