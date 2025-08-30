@@ -9,7 +9,7 @@
         public ICollection<FolderEntity> SubFolders { get; set; } = [];
         public ICollection<FileEntity> Files { get; set; } = [];
         public Guid UserId { get; set; }
-        public Guid FolderId { get; set; }
+        public Guid UpFolderId { get; set; }
         public UserEntity? User { get; set; }
         public FolderEntity? UpFolder { get; set; }
     }
