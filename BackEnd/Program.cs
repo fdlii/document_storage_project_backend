@@ -1,5 +1,7 @@
+using BackEnd.Requests;
 using Microsoft.EntityFrameworkCore;
 using WorkingWithDB;
+using WorkingWithDB.Repositories;
 namespace BackEnd
 {
     public class Program
@@ -21,14 +23,20 @@ namespace BackEnd
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
             );
 
+            builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+
             var app = builder.Build();
 
             app.UseCors("AllowOrigins");
 
             app.MapGet("/", () => "Hello World!");
 
-            app.MapPost("/login", (User user) => { 
-                return Results.StatusCode(200);
+            app.MapPost("/login", async (LoginRequest loginRequest, IUsersRepository usersRepository) => { 
+                var user = await usersRepository.GetUserByEmailAsync(loginRequest.Email);
+                if (user != null) { 
+                    return loginRequest.Password == user.PasswordHash ? Results.Ok() : Results.Unauthorized();
+                }
+                return Results.Unauthorized();
             });
 
             app.Run();
