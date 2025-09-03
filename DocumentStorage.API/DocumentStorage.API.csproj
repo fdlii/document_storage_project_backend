@@ -20,7 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkingWithDB\WorkingWithDB.csproj" />
+    <ProjectReference Include="..\DocumentStorage.Application\DocumentStorage.Application.csproj" />
+    <ProjectReference Include="..\DocumentStorage.Core\DocumentStorage.Core.csproj" />
+    <ProjectReference Include="..\DocumentStorage.Infrastructure\DocumentStorage.Infrastructure.csproj" />
+    <ProjectReference Include="..\DocumentStorage.Persistance\DocumentStorage.Persistance.csproj" />
+    <ProjectReference Include="..\DocumentStorage.Services\DocumentStorage.Infrastructure.csproj" />
+    <ProjectReference Include="..\WorkingWithDB\DocumentStorage.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

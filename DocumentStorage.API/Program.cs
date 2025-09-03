@@ -23,7 +23,7 @@ namespace BackEnd
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
             );
 
-            builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+            //builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
             var app = builder.Build();
 
@@ -31,13 +31,13 @@ namespace BackEnd
 
             app.MapGet("/", () => "Hello World!");
 
-            app.MapPost("/login", async (LoginRequest loginRequest, IUsersRepository usersRepository) => { 
-                var user = await usersRepository.GetUserByEmailAsync(loginRequest.Email);
-                if (user != null) { 
-                    return loginRequest.Password == user.PasswordHash ? Results.Ok() : Results.Unauthorized();
-                }
-                return Results.Unauthorized();
-            });
+            //app.MapPost("/login", async (LoginRequest loginRequest, IUsersRepository usersRepository) => { 
+            //    var user = await usersRepository.GetUserByEmailAsync(loginRequest.Email);
+            //    if (user != null) { 
+            //        return loginRequest.Password == user.PasswordHash ? Results.Ok() : Results.Unauthorized();
+            //    }
+            //    return Results.Unauthorized();
+            //});
 
             app.Run();
         }
