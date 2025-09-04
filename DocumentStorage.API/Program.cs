@@ -1,7 +1,13 @@
 using BackEnd.Requests;
+using DocumentStorage.API.Contracts;
 using Microsoft.EntityFrameworkCore;
 using WorkingWithDB;
 using WorkingWithDB.Repositories;
+using DocumentStorage.Application.Services;
+using DocumentStorage.Application.Interfaces;
+using DocumentStorage.Infrastructure;
+using DocumentStorage.Application.Interfaces.Repositories;
+using DocumentStorage.API.Endpoints;
 namespace BackEnd
 {
     public class Program
@@ -15,7 +21,11 @@ namespace BackEnd
             {
                 options.AddPolicy("AllowOrigins", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                    policy
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
                 });
             });
 
@@ -23,11 +33,15 @@ namespace BackEnd
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
             );
 
-            //builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
             var app = builder.Build();
 
             app.UseCors("AllowOrigins");
+
+            app.MapUserEndpoints();
 
             app.MapGet("/", () => "Hello World!");
 
@@ -41,5 +55,6 @@ namespace BackEnd
 
             app.Run();
         }
+
     }
 }
