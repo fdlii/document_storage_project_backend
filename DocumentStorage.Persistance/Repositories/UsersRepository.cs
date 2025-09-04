@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkingWithDB.Models;
+using DocumentStorage.Persistance.Entities;
 using DocumentStorage.Application.Interfaces.Repositories;
 using DocumentStorage.Core.Models;
 using System.Runtime.InteropServices;
 
-namespace WorkingWithDB.Repositories
+namespace DocumentStorage.Persistance.Repositories
 {
     public class UsersRepository : IUsersRepository
     {

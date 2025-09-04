@@ -1,14 +1,14 @@
 using BackEnd.Requests;
 using DocumentStorage.API.Contracts;
 using Microsoft.EntityFrameworkCore;
-using WorkingWithDB;
-using WorkingWithDB.Repositories;
+using DocumentStorage.Persistance;
+using DocumentStorage.Persistance.Repositories;
 using DocumentStorage.Application.Services;
 using DocumentStorage.Application.Interfaces;
 using DocumentStorage.Infrastructure;
 using DocumentStorage.Application.Interfaces.Repositories;
 using DocumentStorage.API.Endpoints;
-namespace BackEnd
+namespace DocumentStorage.API
 {
     public class Program
     {

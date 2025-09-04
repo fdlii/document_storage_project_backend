@@ -1,8 +1,8 @@
-﻿using WorkingWithDB.Models;
+﻿using DocumentStorage.Persistance.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace WorkingWithDB.Configurations
+namespace DocumentStorage.Persistance.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     {

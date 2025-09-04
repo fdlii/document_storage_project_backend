@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkingWithDB.Models
+namespace DocumentStorage.Persistance.Entities
 {
     public class FileEntity
     {

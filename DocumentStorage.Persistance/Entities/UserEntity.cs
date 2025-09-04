@@ -1,4 +1,4 @@
-﻿namespace WorkingWithDB.Models
+﻿namespace DocumentStorage.Persistance.Entities
 {
     public class UserEntity
     {

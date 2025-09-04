@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WorkingWithDB.Migrations
+namespace DocumentStorage.Persistance.Migrations
 {
     /// <inheritdoc />
     public partial class initial : Migration

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WorkingWithDB.Configurations;
-using WorkingWithDB.Models;
+using DocumentStorage.Persistance.Configurations;
+using DocumentStorage.Persistance.Entities;
 
-namespace WorkingWithDB
+namespace DocumentStorage.Persistance
 {
     public class AppDbContext : DbContext
     {
