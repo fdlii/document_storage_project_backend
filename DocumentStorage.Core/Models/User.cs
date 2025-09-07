@@ -19,5 +19,13 @@ namespace DocumentStorage.Core.Models
             Email = email;
             PasswordHash = passwordHash;
         }
+        public User(Guid guid, string email, string passwordHash, ICollection<Folder> folders, ICollection<File> files)
+        {
+            Id = guid;
+            Email = email;
+            PasswordHash = passwordHash;
+            Folders = folders;
+            Files = files;
+        }
     }
 }

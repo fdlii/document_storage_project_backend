@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DocumentStorage.Persistance.Entities;
 using DocumentStorage.Application.Interfaces.Repositories;
 using DocumentStorage.Core.Models;
+using DocumentStorage.Core;
 using System.Runtime.InteropServices;
 
 namespace DocumentStorage.Persistance.Repositories
@@ -32,14 +33,10 @@ namespace DocumentStorage.Persistance.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task<User> GetUserByEmailAsync(string email)
-        {
-            //return await _appDbContext.Users
-            //    .AsNoTracking()
-            //    .FirstOrDefaultAsync(user => user.Email == email);
-            return new User(Guid.NewGuid(), "email", "password");
-        }
-
-        
+        //public async Task<User> GetUserByEmailAsync(string email)
+        //{
+        //    var userEntity = await _appDbContext.Users
+        //        .FirstOrDefaultAsync(u => u.Email == email);
+        //}
     }
 }
