@@ -18,5 +18,30 @@ namespace DocumentStorage.Core.Models
         public Guid UserId { get; set; }
         public Folder? Folder { get; set; }
         public User? User { get; set; }
+
+        public File(
+            Guid id, 
+            string name, 
+            string extension, 
+            long size, 
+            DateTime createdAt, 
+            string storagePath, 
+            Guid folderId, 
+            Guid userId, 
+            Folder folder, 
+            User user
+            ) 
+        {
+            Id = id;
+            Name = name;
+            Extension = extension;
+            Size = size;
+            CreatedAt = createdAt;
+            StoragePath = storagePath;
+            FolderId = folderId;
+            UserId = userId;
+            Folder = folder;
+            User = user;
+        }
     }
 }

@@ -18,5 +18,29 @@ namespace DocumentStorage.Core.Models
         public Guid UpFolderId { get; set; }
         public User? User { get; set; }
         public Folder? UpFolder { get; set; }
+
+        public Folder(
+            Guid id, 
+            string name, 
+            string path, 
+            DateTime createdAt, 
+            ICollection<Folder> subFolders, 
+            ICollection<File> files, 
+            Guid userId,
+            Guid upFolderId,
+            User user,
+            Folder upFolder)
+        {
+            Id = id; 
+            Name = name;
+            Path = path;
+            CreatedAt = createdAt;
+            SubFolders = subFolders;
+            Files = files;
+            UserId = userId;
+            UpFolderId = upFolderId;
+            User = user;
+            UpFolder = upFolder;
+        }
     }
 }
