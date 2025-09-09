@@ -33,25 +33,23 @@ namespace DocumentStorage.API
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
             );
 
+            builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+
             builder.Services.AddScoped<UserService>();
             builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
             builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+            builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
             var app = builder.Build();
 
             app.UseCors("AllowOrigins");
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.MapUserEndpoints();
 
             app.MapGet("/", () => "Hello World!");
-
-            //app.MapPost("/login", async (LoginRequest loginRequest, IUsersRepository usersRepository) => { 
-            //    var user = await usersRepository.GetUserByEmailAsync(loginRequest.Email);
-            //    if (user != null) { 
-            //        return loginRequest.Password == user.PasswordHash ? Results.Ok() : Results.Unauthorized();
-            //    }
-            //    return Results.Unauthorized();
-            //});
 
             app.Run();
         }

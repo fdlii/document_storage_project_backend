@@ -1,4 +1,5 @@
-﻿using DocumentStorage.Core.Models;
+﻿using DocumentStorage.Application.Interfaces.Repositories;
+using DocumentStorage.Core.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DocumentStorage.Infrastructure
 {
-    public class JwtProvider
+    public class JwtProvider : IJwtProvider
     {
         private readonly JwtOptions _jwtOptions;
         public JwtProvider(IOptions<JwtOptions> options) {
