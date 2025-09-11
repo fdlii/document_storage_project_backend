@@ -1,6 +1,7 @@
 ﻿using DocumentStorage.Application.Services;
 using DocumentStorage.API.Contracts;
 using BackEnd.Requests;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace DocumentStorage.API.Endpoints
 {
@@ -25,10 +26,20 @@ namespace DocumentStorage.API.Endpoints
 
         public static async Task<IResult> Login(
             LoginRequest loginRequest,
-            UserService userService)
+            UserService userService,
+            HttpContext httpContext)
         {
             var token = await userService.Login(loginRequest.Email, loginRequest.Password);
-            return Results.Ok(token);
+
+            httpContext.Response.Cookies.Append("req-option", token, new CookieOptions()
+            {
+                HttpOnly = false,
+                Secure = false,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddMinutes(1)
+            });
+
+            return Results.Ok("Login successful");
         }
     }
 }

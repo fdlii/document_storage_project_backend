@@ -1,13 +1,15 @@
 using BackEnd.Requests;
 using DocumentStorage.API.Contracts;
-using Microsoft.EntityFrameworkCore;
+using DocumentStorage.API.Endpoints;
+using DocumentStorage.API.Extensions;
+using DocumentStorage.Application.Interfaces;
+using DocumentStorage.Application.Interfaces.Repositories;
+using DocumentStorage.Application.Services;
+using DocumentStorage.Infrastructure;
 using DocumentStorage.Persistance;
 using DocumentStorage.Persistance.Repositories;
-using DocumentStorage.Application.Services;
-using DocumentStorage.Application.Interfaces;
-using DocumentStorage.Infrastructure;
-using DocumentStorage.Application.Interfaces.Repositories;
-using DocumentStorage.API.Endpoints;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 namespace DocumentStorage.API
 {
     public class Program
@@ -16,6 +18,7 @@ namespace DocumentStorage.API
         {
             var builder = WebApplication.CreateBuilder(args);
             var configuration = builder.Configuration;
+            var jwtOptions = configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
 
             builder.Services.AddCors(options =>
             {
@@ -34,6 +37,8 @@ namespace DocumentStorage.API
             );
 
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+            builder.Services.AddApiAuthentithication(builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>());
+            builder.Services.AddAuthorization();
 
             builder.Services.AddScoped<UserService>();
             builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
@@ -53,6 +58,5 @@ namespace DocumentStorage.API
 
             app.Run();
         }
-
     }
 }
