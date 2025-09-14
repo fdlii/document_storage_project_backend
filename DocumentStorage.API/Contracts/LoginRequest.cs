@@ -1,4 +1,9 @@
-﻿namespace BackEnd.Requests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BackEnd.Requests
 {
-    public record LoginRequest(string Email, string Password);
+    public record LoginRequest(
+        [Required] string Email,
+        [Required] string Password
+        );
 }

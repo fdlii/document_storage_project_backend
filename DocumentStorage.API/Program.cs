@@ -40,6 +40,9 @@ namespace DocumentStorage.API
             builder.Services.AddApiAuthentithication(builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>());
             builder.Services.AddAuthorization();
 
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             builder.Services.AddScoped<UserService>();
             builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
             builder.Services.AddScoped<IUsersRepository, UsersRepository>();
@@ -48,6 +51,9 @@ namespace DocumentStorage.API
             var app = builder.Build();
 
             app.UseCors("AllowOrigins");
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseAuthentication();
             app.UseAuthorization();

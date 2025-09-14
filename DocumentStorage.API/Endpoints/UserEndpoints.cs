@@ -34,9 +34,10 @@ namespace DocumentStorage.API.Endpoints
             httpContext.Response.Cookies.Append("req-option", token, new CookieOptions()
             {
                 HttpOnly = false,
-                Secure = false,
+                Secure = true,
                 SameSite = SameSiteMode.None,
-                Expires = DateTime.UtcNow.AddMinutes(1)
+                Expires = DateTime.UtcNow.AddMinutes(1),
+                Path = "/"
             });
 
             return Results.Ok("Login successful");

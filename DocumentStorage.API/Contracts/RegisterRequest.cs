@@ -1,4 +1,10 @@
-﻿namespace DocumentStorage.API.Contracts
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DocumentStorage.API.Contracts
 {
-    public record RegisterRequest(string Email, string Password, string confirmPassword);
+    public record RegisterRequest(
+        [Required] string Email,
+        [Required] string Password,
+        [Required] string confirmPassword
+        );
 }
